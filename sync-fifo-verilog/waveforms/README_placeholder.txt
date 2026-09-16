@@ -1,0 +1,2 @@
+Add your waveform screenshot here (export from GTKWave, or from EPWave if you run this on EDA Playground) named screenshot.png
+/Users/ayushsharma/Desktop/Anamika/Projects :Intership/VLSI Synchronous FIFO/sync-fifo-verilog/waveforms/screenshot.png
