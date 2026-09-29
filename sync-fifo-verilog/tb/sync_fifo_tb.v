@@ -5,7 +5,8 @@
 //   2. Directed test: drain FIFO completely, check EMPTY asserts,
 //      confirm a read while empty is correctly blocked.
 //   3. Randomized test: random mix of read/write each cycle,
-//      cross-checked against a software reference queue model.
+//      cross-checked against a software reference queue model,
+//      including full/empty flag checks every cycle.
 // A running PASS/FAIL counter is printed; final summary at the end.
 // =============================================================
 
@@ -122,11 +123,18 @@ module sync_fifo_tb;
 
         for (i = 0; i < 500; i = i + 1) begin
             @(negedge clk);
-            wr_en   = ($random % 2 == 0);
-            rd_en   = ($random % 3 == 0);   // read a bit less often than write
+
+            // Check flags FIRST, against the reference model state left over
+            // from the previous cycle's action -- this matches what the DUT's
+            // full/empty currently reflect (i.e. state after the last posedge).
+            check(empty === (ref_head == ref_tail), "empty flag mismatch vs reference model");
+            check(full  === (ref_tail - ref_head == DEPTH), "full flag mismatch vs reference model");
+
+            wr_en   = ($random & 1);         // ~50% writes
+            rd_en   = (($random & 3) == 0);  // ~25% reads
             data_in = $random;
 
-            // model the write
+            // model the write (this cycle's action, applies at the next posedge)
             if (wr_en && !full) begin
                 ref_queue[ref_tail] = data_in;
                 ref_tail = ref_tail + 1;
