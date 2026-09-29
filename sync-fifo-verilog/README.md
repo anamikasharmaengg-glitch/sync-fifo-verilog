@@ -16,14 +16,15 @@ for a worked explanation of why this is needed and how it works.
 - Overflow/underflow protection (writes/reads are silently blocked, not corrupting the FIFO)
 
 ## Verification
-- **166/166 automated checks passed**
+- **1127/1127 automated checks passed**
 - Directed tests: fill-to-full, drain-to-empty, overflow/underflow blocking
 - Randomized test: 500 cycles of random read/write, every read validated
-  against a software reference queue built inside the testbench
+  against a software reference queue, plus `full`/`empty` flags checked
+  against the reference model every cycle
 
 ```
 =========================================
- TEST SUMMARY: 166 PASSED, 0 FAILED
+ TEST SUMMARY: 1127 PASSED, 0 FAILED
  RESULT: ALL TESTS PASSED
 =========================================
 ```
@@ -34,7 +35,7 @@ sync-fifo-verilog/
 ├── rtl/sync_fifo.v         # FIFO design
 ├── tb/sync_fifo_tb.v       # self-checking testbench
 ├── docs/design_notes.md    # full/empty pointer logic explained
-├── waveforms/              # simulation waveform screenshot
+├── waveforms/              # waveform screenshot + full console log
 └── README.md
 ```
 
