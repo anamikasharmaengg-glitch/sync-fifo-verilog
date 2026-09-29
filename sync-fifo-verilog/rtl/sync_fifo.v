@@ -9,6 +9,8 @@
 //   DEPTH      : number of entries, MUST be a power of 2 (default 8)
 // =============================================================
 
+`timescale 1ns / 1ps
+
 module sync_fifo #(
     parameter DATA_WIDTH = 8,
     parameter DEPTH      = 8                     // must be power of 2
