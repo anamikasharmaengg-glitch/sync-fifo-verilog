@@ -1,0 +1,21 @@
+[2026-09-29 09:50:22 UTC] iverilog '-Wall' '-g2012' design.sv testbench.sv  && unbuffer vvp a.out  
+=========================================
+ Synchronous FIFO Self-Checking Testbench
+=========================================
+
+-- TEST 1: Fill FIFO to FULL, verify blocked write --
+VCD info: dumpfile sync_fifo.vcd opened for output.
+
+-- TEST 2: Drain FIFO, verify FIFO order + EMPTY + blocked read --
+
+-- TEST 3: Randomized read/write vs software reference model --
+
+=========================================
+ TEST SUMMARY: 1127 PASSED, 0 FAILED
+ RESULT: ALL TESTS PASSED
+=========================================
+testbench.sv:163: $finish called at 6490000 (1ps)
+Finding VCD file...
+./sync_fifo.vcd
+[2026-09-29 09:50:23 UTC] Opening EPWave...
+Done
